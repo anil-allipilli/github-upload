@@ -18,9 +18,26 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
+msg = "Set the %s environment variable"
+
+def get_env_variable(var_name):
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = msg % var_name
+        raise ImproperlyConfigured(error_msg)
+        
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+DB_PASS = False
+ENV_ROLE = 'development'
+if ENV_ROLE == 'development':
+    DEBUG = True
+    TEMPLATE_DEBUG = DEBUG
+    DB_PASS = get_env_variable('DB_PASS')
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'zrt_&@k7ajz&03_+nkw@%)d!02l(g$zm129pcaq14c4t&sghcm'
+SECRET_KEY = get_env_variable('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,7 +100,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'school_app_3',
         'USER': 'anilkmr458',
-        'PASSWORD': 'Naruto123!!!',
+        'PASSWORD': DB_PASS,
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
