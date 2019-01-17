@@ -87,19 +87,19 @@ class MyUser(AbstractUser):
 
 
 
-# from profiles.models import Scholar, SchoolTeacher, Gaurdian, Physician, ManagementStaff
+from profiles.models import Scholar, SchoolTeacher, Gaurdian, Physician, ManagementStaff
 
-# @receiver(post_save, sender=MyUser)
-# def ensure_account_exists(sender, **kwargs):
-#     if kwargs.get('created', False):
-#         print(kwargs)
-#         if kwargs.get('instance').is_student:
-#             Scholar.objects.get_or_create(student=kwargs.get('instance'))
-#         if kwargs.get('instance').is_teacher:
-#             SchoolTeacher.objects.get_or_create(teacher=kwargs.get('instance'))
-#         if kwargs.get('instance').is_parent:
-#             Gaurdian.objects.get_or_create(parent=kwargs.get('instance'))
-#         if kwargs.get('instance').is_physician:
-#             Physician.objects.get_or_create(name=kwargs.get('instance'))
-#         if kwargs.get('instance').is_staff:
-#             ManagementStaff.objects.get_or_create(name=kwargs.get('instance'))
+@receiver(post_save, sender=MyUser)
+def ensure_account_exists(sender, **kwargs):
+    if kwargs.get('created', False):
+        print(kwargs)
+        if kwargs.get('instance').is_student:
+            Scholar.objects.get_or_create(student=kwargs.get('instance'))
+        if kwargs.get('instance').is_teacher:
+            SchoolTeacher.objects.get_or_create(teacher=kwargs.get('instance'))
+        if kwargs.get('instance').is_parent:
+            Gaurdian.objects.get_or_create(parent=kwargs.get('instance'))
+        if kwargs.get('instance').is_physician:
+            Physician.objects.get_or_create(name=kwargs.get('instance'))
+        if kwargs.get('instance').is_staff:
+            ManagementStaff.objects.get_or_create(name=kwargs.get('instance'))

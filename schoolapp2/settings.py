@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'accounts',
     'subjects',
+    'profiles',
 ]
 AUTH_USER_MODEL = 'accounts.MyUser'
 MIDDLEWARE = [

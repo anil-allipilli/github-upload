@@ -1,0 +1,7 @@
+__ pycache __
+*.pyc
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+media/**
+!media/**/init.txt
